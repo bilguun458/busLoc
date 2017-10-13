@@ -2,9 +2,7 @@ extends layout
 
 block content
   #banner.page-header
-    .row
-      .col-md-6.col-sm-12
-        h1= title
+    h1= title
   .row
-    .col-md-6.col-sm-12
+    .col-xs-12
       p !{(content).replace(/\n/g, '<br/>')}
