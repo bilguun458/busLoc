@@ -7,8 +7,8 @@ var busSchema = new mongoose.Schema({
 });
 
 var routeSchema = new mongoose.Schema({
-    from: {Schema.Types.ObjectId, ref:'Station'},
-    to: {Schema.Types.ObjectId, ref:'Station'},
+    from: String,//{Schema.Types.ObjectId, ref:'Station'},
+    to: String,//{Schema.Types.ObjectId, ref:'Station'},
     departures: [{
         date: Date,
         bus: busSchema

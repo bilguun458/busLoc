@@ -33,8 +33,8 @@ module.exports.routesCreate = function (req, res) {
       departures: [{
         date: new Date(),
         bus: {
-          licenseNumber: req.body.bus.licenseNumber;
-          driver: req.body.bus.driver;
+          licenseNumber: req.body.bus.licenseNumber,
+          driver: req.body.bus.driver
         }
       }]
   }, function(err, route) {
@@ -47,7 +47,7 @@ module.exports.routesCreate = function (req, res) {
 };
 
 
-module.export.routesUpdateOne = function(req, res) {
+module.exports.routesUpdateOne = function(req, res) {
   if(!req.params.routeid) {
     sendJSONresponse(res, 404, {
       "message": "Not found, routeid is required"
@@ -82,7 +82,6 @@ module.export.routesUpdateOne = function(req, res) {
     });
 };
 
-/* DELETE /api/route/:routeid */
 module.exports.routesDeleteOne = function(req, res) {
   var routeid = req.params.routeid;
   if (routeid) {
@@ -105,3 +104,10 @@ module.exports.routesDeleteOne = function(req, res) {
     });
   }
 };
+
+
+module.exports.routesListByStations = function(req, res) {
+  sendJSONresponse(res, 500, {
+    "message": "internal server error"
+  });
+}
