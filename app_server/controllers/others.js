@@ -8,3 +8,7 @@ module.exports.about = function(req, res) {
         ' * Хэрэглэгч тээврийн хэрэгслүүдийн улсын бүртгэлийн дугаарыг зорчих чиглэл болон хөдлөх огноогоор нь шүүлт хийж  харах боломжтой байх')
       });
 };
+
+module.exports.angularApp = function(req, res) {
+	res.render('layout', { title: 'BusLocation' });
+}

@@ -5,7 +5,8 @@ var ctrlOthers = require('../controllers/others');
 var ctrlMap = require('../controllers/maps')
 
 /* GET home page. */
-router.get('/', ctrlMap.byLicense);
+router.get('/', ctrlOthers.angularApp);
+//router.get('/', ctrlMap.byLicense);
 router.get('/route', ctrlMap.byRoute);
 router.get('/about', ctrlOthers.about);
 module.exports = router;
