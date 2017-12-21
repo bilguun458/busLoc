@@ -1,3 +1,17 @@
-<p> {{ vm.message }} </p>
+<navigation></navigation>
 
-<iframe width="1000" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://graphhopper.com/maps/?point=47.91901688406377%2C106.91774368286133&point=47.194379%2C102.826538&point=49.98004%2C92.068863&point=48.7544%2C98.2617&locale=en-us&vehicle=car&weighting=fastest&elevation=true&use_miles=false&layer=Omniscale" style="border: 1px solid black">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <form>
+	<div class="form-group has-feedback">
+	  <label class="control-label">Улсын дугаар</label>
+	  <input type="text" class="form-control" placeholder="УБА1234" ng-model="vm.licenceNumber"/>
+	  <button type="button" class="btn" ng-click="vm.search(vm.licenceNumber)">Хайх</button>
+	  <span>{{vm.searchMessage}}</span>
+	</div>
+      </form>
+      <iframe width="1200" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" ng-src="{{vm.mapUrl}}" style="border: 1px solid black">
+    </div>
+  </div>
+</div>

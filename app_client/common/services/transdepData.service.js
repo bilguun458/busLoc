@@ -1,0 +1,23 @@
+(function(){
+    "use strict";
+    angular
+	.module('busLocApp')
+	.service('transdepData', transdepData);
+
+    transdepData.$inject = ['$http'];
+    function transdepData($http) {
+	var service = this;
+	service.getStations = function() {
+	    return $http.get('api/route/stations');
+	};
+	service.getRoutes = function() {
+	    return $http.get('api/route/routes');
+	};
+	service.getPointsByLNumber = function(licenseNumber) {
+	    return $http.get('api/route/routes/points/'+licenseNumber);
+	};
+	service.getBusLocation = function(licenseNumber) {
+	    return $http.get('api/route/bus/'+licenseNumber);
+	}
+    }
+})();

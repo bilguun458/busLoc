@@ -1,0 +1,43 @@
+<navigation></navigation>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <form>
+
+	<div class="form-group">
+	  <label for="stationFrom">Example multiple select</label>
+	  <select class="form-control" id="stationFrom" ng-model="vm.stationFrom">
+	    <option disabled selected value>---Сонгох---</option>
+	    <option ng-repeat="from in vm.stations" value="{{from.name}}">{{from.name}}</option>
+	  </select>
+	</div>
+
+	
+	<div class="form-group">
+	  <label for="stationTo">Example multiple select</label>
+	  <select class="form-control" id="stationTo" ng-model="vm.stationTo">
+	    <option disabled selected value>---Сонгох---</option>
+	    <option ng-repeat="to in vm.stations | filter: {name: '!'+vm.stationFrom}" value="{{to.name}}">{{to.name}}</option>
+	  </select>
+	</div>
+	  
+	<div class="form-group">
+	  <label for="routeSelect">Example multiple select</label>
+	  <div ng-show="vm.stationFrom != undefined && vm.stationTo" ng-repeat="route in vm.routes | filter: {from: vm.stationFrom, to: vm.stationTo}:true">
+	    <select class="form-control" id="routeSelect">
+	      <option disabled selected value>---Сонгох---</option>
+	      <option ng-repeat="departure in route.departures" value="">{{departure.date + " " + departure.bus.licenseNumber}}</option>
+	    </select>
+	  </div>
+	</div>
+	
+      </form>
+    </div>
+    
+    <div class="col-xs-6">
+      
+    </div>
+    
+  </div>
+</div>
