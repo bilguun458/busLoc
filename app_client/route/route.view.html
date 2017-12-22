@@ -6,7 +6,7 @@
       <form>
 
 	<div class="form-group">
-	  <label for="stationFrom">Example multiple select</label>
+	  <label for="stationFrom">Хаанаас</label>
 	  <select class="form-control" id="stationFrom" ng-model="vm.stationFrom">
 	    <option disabled selected value>---Сонгох---</option>
 	    <option ng-repeat="from in vm.stations" value="{{from.name}}">{{from.name}}</option>
@@ -15,7 +15,7 @@
 
 	
 	<div class="form-group">
-	  <label for="stationTo">Example multiple select</label>
+	  <label for="stationTo">Хаашаа</label>
 	  <select class="form-control" id="stationTo" ng-model="vm.stationTo">
 	    <option disabled selected value>---Сонгох---</option>
 	    <option ng-repeat="to in vm.stations | filter: {name: '!'+vm.stationFrom}" value="{{to.name}}">{{to.name}}</option>
@@ -23,6 +23,7 @@
 	</div>
 
 	
+	<label>Чиглэлд явсан автобуснууд</label>
 	<div ng-show="vm.stationFrom != undefined && vm.stationTo" ng-repeat="route in vm.routes | filter: {from: vm.stationFrom, to: vm.stationTo}:true">
 	  <ul>
 	    <li ng-repeat="departure in route.departures" value=""> {{ departure.date | dateInMillis | date: 'medium' }}  --  {{ departure.bus.licenseNumber }}</li>

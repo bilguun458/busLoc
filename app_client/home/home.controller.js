@@ -16,6 +16,13 @@
 	};
 	
 	vm.changeMapUrl('');
+
+	vm.generatePointStr = function() {
+	    for (var i = 0; i < vm.mapPoints.length; i++) {
+		vm.pointStr += 'point='+vm.mapPoints[i].lat+','+vm.mapPoints[i].lon+'&';
+	    }
+	    vm.changeMapUrl(vm.pointStr);
+	};
 	
 	vm.search = function(licenseNumber) {
 	    vm.pointStr = '';
@@ -35,10 +42,7 @@
 			vm.searchMessage = 'Хайлт олдсонгүй';
 		    } else {
 			vm.searchMessage = 'Чиглэл: ' + response.data.from + '-' + response.data.to;
-			for (var i = 0; i < vm.mapPoints.length; i++) {
-			    vm.pointStr += 'point='+vm.mapPoints[i].lat+','+vm.mapPoints[i].lon+'&';
-			}
-			vm.changeMapUrl(vm.pointStr);
+			vm.generatePointStr();
 		    }
 		})
 		.catch(function(err) {

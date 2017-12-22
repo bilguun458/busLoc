@@ -4,7 +4,6 @@ var dbURI = 'mongodb://localhost/busLoc';
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGODB_URI;
 }
-
 mongoose.connect(dbURI);
 
 // CONNECTION EVENTS
