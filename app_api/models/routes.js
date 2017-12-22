@@ -8,8 +8,14 @@ var busSchema = new mongoose.Schema({
 
 var pointSchema = new mongoose.Schema({
     name: String,
-    lat: Number,
-    lon: Number
+    lat: {
+	type: Number,
+	required: true
+    },
+    lon: {
+	type: Number,
+	required: true
+    }
 });
 
 var routeSchema = new mongoose.Schema({
@@ -23,8 +29,14 @@ var routeSchema = new mongoose.Schema({
 	ref: 'Station',
     },
     */
-    from: String,
-    to: String,
+    from: {
+	type: String,
+	required: true
+    },
+    to: {
+	type: String,
+	required: true
+    },
     departures: [{
         date: Date,
         bus: busSchema
