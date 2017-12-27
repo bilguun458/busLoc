@@ -10,10 +10,8 @@
 
 
 	vm.main = {
-	    title: 'BusLocation Тухай',
-	    content: ''
-	};
-
+	    title: 'Автотээврийн үндэсний төвийн системээс авах өгөгдлийн талаар'
+	}
 	vm.main.title = $sce.trustAsHtml(vm.main.title);
 	vm.main.content = $sce.trustAsHtml(vm.main.content.replace(/\n/g, '<br/>'));
     }

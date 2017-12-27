@@ -30,10 +30,12 @@
 	    <tr>
 	      <th>Хөдөлсөн огноо</th>
 	      <th>Тээврийн хэрэгслийн улсын дугаар</th>
+	      <th>Тээврийн хэрэгслийн жолооч</th>
 	    </tr>
 	    <tr ng-repeat="departure in route.departures">
 	      <td>{{ departure.date | dateInMillis | date: 'yyyy-MM-dd hh:mm' }}</td>
 	      <td>{{ departure.bus.licenseNumber }}</td>
+	      <td>{{ departure.bus.driver }}</td>
 	    </tr>
 	  </table>
 	</div>
