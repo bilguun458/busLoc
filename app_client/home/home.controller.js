@@ -31,7 +31,7 @@
 		    vm.pointStr = 'point=' + response.data.lat + ',' + response.data.lon + '&';
 		})
 		.catch(function(response) {
-		    vm.searchMessage = 'Хайлт алдаатай байна';
+		    vm.searchMessage = 'Хайлт олдсонгүй';
 		    console.log(err);
 		});
 	    transdepData.getPointsByLNumber(licenseNumber) 
@@ -46,7 +46,7 @@
 		    }
 		})
 		.catch(function(err) {
-		    vm.searchMessage = 'Хайлт алдаатай байна ';
+		    vm.searchMessage = 'Хайлт олдсонгүй';
 		    console.log(err);
 		});
 

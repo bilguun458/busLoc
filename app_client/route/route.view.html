@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-xs-12">
       <form>
-	<p>Доорх талбаруудад чиглэлийн мэдээллийг сонгож өгсөнөөр тухайн чиглэлд хөдөлсөн тээврийн хэрэгслийн цаг болон улсын дугаарын мэдээллийг авах боломжтой. </p>
+	<p>Доорх талбаруудад чиглэлийн мэдээллийг сонгож өгсөнөөр тухайн чиглэлд замдаа явж буй тээврийн хэрэгслүүдийн хөдөлсөн огноо болон улсын дугаарын мэдээллийг авах боломжтой. </p>
 	<div class="form-group">
 	  <label for="stationFrom">Хаанаас</label>
 	  <select class="form-control" id="stationFrom" ng-model="vm.stationFrom">
@@ -21,21 +21,21 @@
 	    <option ng-repeat="to in vm.stations | filter: {name: '!'+vm.stationFrom}" value="{{to.name}}">{{to.name}}</option>
 	  </select>
 	</div>
+	<!-- 	-->
 
 	<div ng-show="vm.stationFrom !== undefined && vm.stationTo !== undefined" ng-repeat="route in vm.filteredRoute = (vm.routes | filter:{from: vm.stationFrom, to: vm.stationTo}:true)">
 
-	  <label>{{vm.stationFrom}}-{{vm.stationTo}} чиглэлд явсан автобуснууд</label>
+	  <label>{{vm.stationFrom}}-{{vm.stationTo}} чиглэлд явж байгаа автобуснууд</label>
 	  <table class="table table-striped">
 	    <tr>
 	      <th>Хөдөлсөн огноо</th>
 	      <th>Тээврийн хэрэгслийн улсын дугаар</th>
 	    </tr>
 	    <tr ng-repeat="departure in route.departures">
-	      <td>{{ departure.date | dateInMillis | date: 'medium' }}</td>
+	      <td>{{ departure.date | dateInMillis | date: 'yyyy-MM-dd hh:mm' }}</td>
 	      <td>{{ departure.bus.licenseNumber }}</td>
 	    </tr>
 	  </table>
-
 	</div>
 	<p ng-show="vm.stationFrom !== undefined && vm.stationTo !== undefined && !vm.filteredRoute.length">Тухайн чиглэлд хөдөлсөн тээврийн хэрэгсэл байхгүй.</p>
 	
