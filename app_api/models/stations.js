@@ -2,11 +2,8 @@ var mongoose = require('mongoose');
 
 var stationSchema = new mongoose.Schema({
     name: String,
-    coords: {
-        type: [Number],
-  	index: '2dsphere'
-    }
-    
+    lat: Number,
+    lng: Number
 });
 
 mongoose.model('Station', stationSchema);

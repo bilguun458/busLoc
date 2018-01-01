@@ -18,16 +18,19 @@ app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'jade');
 
 
-var appClientFiles = [
-    'app_client/app.js',
-    'app_client/home/home.controller.js',
-    'app_client/about/about.controller.js',
-    'app_client/route/route.controller.js',
-    'app_client/common/directives/navigation/navigation.directive.js',
-    'app_client/common/services/transdepData.service.js',
-    'app_client/common/filters/dateInMillis.filter.js',
-    'app_client/common/filters/addHtmlLineBreaks.filter.js'
-];
+var appClientFiles = {
+    "app_client/app.js": fs.readFileSync("app_client/app.js", "utf8"),
+    "app_client/home/home.controller.js": fs.readFileSync("app_client/home/home.controller.js", "utf8"),
+    "app_client/about/about.controller.js": fs.readFileSync("app_client/about/about.controller.js", "utf8"),
+    "app_client/route/route.controller.js": fs.readFileSync("app_client/route/route.controller.js", "utf8"),
+    "app_client/common/directives/navigation/navigation.directive.js": fs.readFileSync("app_client/common/directives/navigation/navigation.directive.js", "utf8"),
+    "app_client/common/services/transdepData.service.js": fs.readFileSync("app_client/common/services/transdepData.service.js", "utf8"),
+    "app_client/common/services/googleDirection.service.js": fs.readFileSync("app_client/common/services/googleDirection.service.js", "utf8"),
+    "app_client/common/filters/dateInMillis.filter.js": fs.readFileSync("app_client/common/filters/dateInMillis.filter.js", "utf8"),
+    "app_client/common/filters/addHtmlLineBreaks.filter.js": fs.readFileSync("app_client/common/filters/addHtmlLineBreaks.filter.js", "utf8")
+};
+
+
 var uglified = uglifyJs.minify(appClientFiles, { compress : false });
 
 fs.writeFile('public/angular/busLoc.min.js', uglified.code, function(err) {

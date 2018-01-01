@@ -1,47 +1,25 @@
 var mongoose = require('mongoose');
-require('./stations');
 
 var busSchema = new mongoose.Schema({
     licenseNumber: String,
     driver: String
 });
 
-var pointSchema = new mongoose.Schema({
+var stationSchema = new mongoose.Schema({
     name: String,
-    lat: {
-	type: Number,
-	required: true
-    },
-    lon: {
-	type: Number,
-	required: true
-    }
+    lat: Number,
+    lng: Number
 });
 
+
 var routeSchema = new mongoose.Schema({
-    /*
-    from: {
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'Station',
-    }, 
-    to: {
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'Station',
-    },
-    */
-    from: {
-	type: String,
-	required: true
-    },
-    to: {
-	type: String,
-	required: true
-    },
+    origin: stationSchema,
+    destination: stationSchema,
     departures: [{
         date: Date,
         bus: busSchema
     }],
-    points: [pointSchema]
+    waypoints: [stationSchema]
 });
 
 
@@ -49,35 +27,100 @@ mongoose.model('Route', routeSchema);
 
 /*
 db.routes.insert({ 
-from: 'Улаанбаатар',    
-to: 'Улаангом',    
+origin: {name:'Улаанбаатар', lat:47.91901688406377, lng:106.91774368286133},    
+destination: 	{name:'Улаангом', lat:49.98004, lng:92.068863},    
 departures: [{
 	date: new ISODate('2017-12-28T15:00'),
-	bus: {licenseNumber: 'ува1234', driver: 'Бат'}
+	bus: {licenseNumber: '1234ува', driver: 'Бат'}
 	},	{
 	date: new ISODate('2017-12-29T15:00'),
-	bus: {licenseNumber: 'ува3232', driver: 'Дорж'}
+	bus: {licenseNumber: '3232ува', driver: 'Дорж'}
 }],  
-points: [{name:'Улаанбаатар', lat:47.91901688406377, lon:106.91774368286133},
-	{name:'Хархорин', lat:47.194379, lon:102.826538},
-	{name:'Цэцэрлэг', lat:48.7544, lon:98.2617},	
-	{name:'Улаангом', lat:49.98004, lon:92.068863}	]})
+waypoints: [
+	{name:'Хархорин', lat:47.194379, lng:102.826538},
+	{name:'Цэцэрлэг', lat:48.7544, lng:98.2617}	]})
 
 
 db.routes.insert({ 
-from: 'Улаангом',    
-to: 'Улаанбаатар',    
+origin: {name:'Улаангом', lat:49.98004, lng:92.068863}	,    
+destination: 	{name:'Улаанбаатар', lat:47.91901688406377, lng:106.91774368286133},
 departures: [{
 	date: new ISODate('2017-12-27T15:00'),
-	bus: {licenseNumber: 'ува1568', driver: 'Батаа'}
+	bus: {licenseNumber: '1568ува', driver: 'Батаа'}
 	},	{
 	date: new ISODate('2017-12-28T15:00'),
-	bus: {licenseNumber: 'увх3326', driver: 'Тамир'}
+	bus: {licenseNumber: '3326увх', driver: 'Тамир'}
 }],  
-points: [{name:'Улаангом', lat:49.98004, lon:92.068863}	,
-	{name:'Цэцэрлэг', lat:48.7544, lon:98.2617},	
-	{name:'Хархорин', lat:47.194379, lon:102.826538},
-	{name:'Улаанбаатар', lat:47.91901688406377, lon:106.91774368286133},
+waypoints: [
+	{name:'Цэцэрлэг', lat:48.7544, lng:98.2617},	
+	{name:'Хархорин', lat:47.194379, lng:102.826538},
 	]})
+
+
+
+db.routes.insert({
+origin: {name:'Улаанбаатар', lat:47.91901688406377, lng:106.91774368286133},
+destination: {name:'Улаангом', lat:49.98004, lng:92.068863},
+departures: [{
+date: new ISODate('2017-12-28T15:00'),
+bus: {licenseNumber: '1234ува', driver: 'Бат'}
+}, {
+date: new ISODate('2017-12-29T15:00'),
+bus: {licenseNumber: '3232ува', driver: 'Дорж'}
+}],
+waypoints: [
+{name:'Хархорин', lat:47.194379, lng:102.826538},
+{name:'Цэцэрлэг', lat:48.7544, lng:98.2617}
+]
+})
+
+db.routes.insert({
+origin: {name:'Улаангом', lat:49.98004, lng:92.068863} ,
+destination: {name:'Улаанбаатар', lat:47.91901688406377, lng:106.91774368286133},
+departures: [{
+date: new ISODate('2017-12-27T15:00'),
+bus: {licenseNumber: '1568ува', driver: 'Батаа'}
+}, {
+date: new ISODate('2017-12-28T15:00'),
+bus: {licenseNumber: '3326увх', driver: 'Тамир'}
+}],
+waypoints: [
+{name:'Цэцэрлэг', lat:48.7544, lng:98.2617},
+{name:'Хархорин', lat:47.194379, lng:102.826538},
+]})
+
+db.routes.insert({
+origin: {name: 'Улаанбаатар', lat:47.90161354142077, lng:106.91894531250001},
+destination: {name: 'Баянхонгор', lat:46.19694327530828, lng:100.7226562500000},
+departures:[{
+     date: new ISODate('2017-12-22T15:00Z'),
+     bus: { licenseNumber: '1231бха'}
+     }],
+waypoints: [
+     {lat:47.18224592701491, lng:102.83752441406251},
+]
+})
+
+db.routes.insert({
+origin: {name: 'Улаанбаатар', lat:47.91901688406377, lng:106.91774368286133},
+destination: {name: 'Цэцэрлэг', lat:48.7544, lng:98.2617},
+departures:[{
+     date: new ISODate('2017-12-28T16:00Z'),
+     bus: { licenseNumber: '1231ара'}
+     }],
+waypoints: [
+{lat:47.194379, lng:102.826538},
+]
+})
+
+db.routes.insert({
+origin: {name:'Улаанбаатар', lat:47.91901688406377, lng:106.91774368286133},
+destination: {name:'Хархорин', lat:47.194379, lng:102.826538},
+departures:[{
+     date: new ISODate('2017-12-27T16:00:00Z'),
+     bus: { licenseNumber: '1231өва'}
+     }],
+waypoints: []
+})
 
 */
