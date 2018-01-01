@@ -11,7 +11,6 @@
 	transdepData.getStations()
 	    .then(function(response) {
 		vm.stations = response.data;
-//		console.log(response);
 	    })
 	    .catch(function(err) {
 		console.log(err);
@@ -19,7 +18,6 @@
 	transdepData.getRoutes()
 	    .then(function(response) {
 		vm.routes = response.data;
-//		console.log(response);
 	    })
 	    .catch(function(err) {
 		console.log(err);

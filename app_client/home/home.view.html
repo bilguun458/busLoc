@@ -3,22 +3,48 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <p><i>Энэ систем нь замдаа явж буй хот хоорондын зорчигч тээврийн хэрэгслүүдын байршлын мэдээллийг газрын зураг дээр дүрслэн харуулахад зориулагдсан.</i></p>
       
-      <p>Доорх талбарт хот хооронд зорчигч тээврийн хэрэгслийн улсын дугаарыг бичиж хайх товчийг дарснаар тухайн тээврийн хэрэгслийн газрын зураг дээрх байршлын мэдээллийг авах боломжтой. Хот хооронд зорчих тээврийн хэрэгслийн мэдээллийг <a href="#/route">Чиглэл</a> хэсгээс авна уу.</p>
+      <!-- <p><i>Энэ систем нь замдаа явж буй хот хоорондын зорчигч тээврийн хэрэгслүүдын байршлын мэдээллийг газрын зураг дээр дүрслэн харуулахад зориулагдсан.</i></p> -->
+      
+      <!-- <p>Доорх талбарт хот хооронд зорчигч тээврийн хэрэгслийн улсын дугаарыг бичиж хайх товчийг дарснаар тухайн тээврийн хэрэгслийн газрын зураг дээрх байршлын мэдээллийг авах боломжтой. Хот хооронд зорчих тээврийн хэрэгслийн мэдээллийг <a href="#/route">Чиглэл</a> хэсгээс авна уу.</p> -->
 
-      <div class="row">
-	<div class="col-xs-6">
-	  <input type="text" class="form-control" placeholder="уба1234" ng-model="vm.licenceNumber"/>
-	</div>
-	<div class="col-xs-2">
-	  <button autofocus type="button" class="btn" ng-click="vm.search(vm.licenceNumber)">Хайх</button>
+      <div class="dropdown" auto-close="outsideClick">
+	<input disable-auto-close class="form-control dropdown-toggle"  data-toggle="dropdown" type="text" ng-model="searchText" placeholder="Search"></input>
+	<div class="dropdown-menu">
+	  <a ng-repeat="departure in vm.departures | filter:searchText"
+	     ng-click="vm.search(departure.bus.licenseNumber)"
+	     class="list-group-item list-group-item-action">
+	    Чиглэл: {{departure.origin}}-{{departure.destination}},
+	    Хөдөлсөн огноо: {{ departure.date | dateInMillis | date: 'yyyy-MM-dd hh:mm' }},
+	    Жолооч: {{departure.bus.driver}},
+	    Улсын дугаар: {{departure.bus.licenseNumber}}
+	  </a>
 	</div>
       </div>
-      <br>
+
+      
+      <!-- <input ng-model="searchText"/> -->
+      <!-- <div> -->
+      <!-- 	<ul> -->
+      <!-- 	  <li ng-repeat="departure in vm.departures | filter:searchText" ng-click="vm.search(departure.bus.licenseNumber)"> -->
+      <!-- 	    {{departure.origin}} -> {{departure.destination}}, -->
+      <!-- 	    {{departure.date}}, {{departure.bus.driver}}, {{departure.bus.licenseNumber}}</li> -->
+      <!-- 	</ul> -->
+      <!-- </div> -->
+      
+      <!-- <div class="row"> -->
+      <!-- 	<div class="col-xs-6"> -->
+      <!-- 	  <input type="text" class="form-control" placeholder="уба1234" ng-model="vm.licenceNumber"/> -->
+      <!-- 	</div> -->
+      <!-- 	<div class="col-xs-2"> -->
+      <!-- 	  <button autofocus type="button" class="btn" ng-click="vm.search(vm.licenceNumber)">Хайх</button> -->
+      <!-- 	</div> -->
+      <!-- </div> -->
+      <!-- <br> -->
       <strong>{{vm.searchMessage}}</strong><br><br>
       <p>Газрын зураг дээр автобусны байршилыг <strong>ногоон</strong> тэмдэглэгээгээр дүрслэв.</p>
-      <iframe ng-src="{{vm.mapUrl}}">
+      <div id="map"></div>
+      <!--      <iframe ng-src="{{vm.mapUrl}}"> -->
     </div>
   </div>
 </div>

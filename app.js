@@ -24,7 +24,6 @@ var appClientFiles = [
     'app_client/about/about.controller.js',
     'app_client/route/route.controller.js',
     'app_client/common/directives/navigation/navigation.directive.js',
-    'app_client/common/directives/navigation/navigation.controller.js',
     'app_client/common/services/transdepData.service.js',
     'app_client/common/filters/dateInMillis.filter.js',
     'app_client/common/filters/addHtmlLineBreaks.filter.js'

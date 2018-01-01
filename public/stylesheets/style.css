@@ -7,14 +7,7 @@ a {
   color: #00B7FF;
 }
 
-.container iframe {
-    width: 120%;
+#map {
     height: 600px;
-    margin-left:-295px;
-    border:0 solid;
 }
 
-.container {
-    overflow: hidden;
-    margin: auto;
-}
