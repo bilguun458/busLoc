@@ -22,6 +22,7 @@ var appClientFiles = {
     "app_client/app.js": fs.readFileSync("app_client/app.js", "utf8"),
     "app_client/home/home.controller.js": fs.readFileSync("app_client/home/home.controller.js", "utf8"),
     "app_client/about/about.controller.js": fs.readFileSync("app_client/about/about.controller.js", "utf8"),
+    "app_client/why/why.controller.js": fs.readFileSync("app_client/why/why.controller.js", "utf8"),
     "app_client/route/route.controller.js": fs.readFileSync("app_client/route/route.controller.js", "utf8"),
     "app_client/common/directives/navigation/navigation.directive.js": fs.readFileSync("app_client/common/directives/navigation/navigation.directive.js", "utf8"),
     "app_client/common/services/transdepData.service.js": fs.readFileSync("app_client/common/services/transdepData.service.js", "utf8"),

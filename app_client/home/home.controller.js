@@ -4,8 +4,8 @@
 	.module('busLocApp')
 	.controller('homeCtrl', homeCtrl);
 
-    homeCtrl.$inject = ['$scope', 'transdepData', 'googleDirection', '$sce', '$window'];
-    function homeCtrl($scope, transdepData, googleDirection, $sce, $window) {
+    homeCtrl.$inject = ['$scope', 'transdepData', '$sce', '$window'];
+    function homeCtrl($scope, transdepData, $sce, $window) {
 	var vm = this;
 	var directionsService = new google.maps.DirectionsService;
 	var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -29,63 +29,66 @@
 			origin: vm.routes[i].origin.name,
 			destination: vm.routes[i].destination.name,
 			date: vm.routes[i].departures[j].date,
-			bus: vm.routes[i].departures[j].bus
+			bus: vm.routes[i].departures[j].bus,
+			routeIdx: i			
 		    });
 		}
+	    vm.search(0);
 	};
 	
-	vm.search = function(licenseNumber) {
-	    transdepData.getBusLocation(licenseNumber)
+	vm.search = function(index) {
+
+	    vm.route = vm.routes[vm.departures[index].routeIdx];
+	    vm.route.date = vm.departures[index].date;
+	    $scope.searchMessage = 'Чиглэл: ' + vm.route.origin.name + '-' + vm.route.destination.name
+	    transdepData.getBusLocation(vm.departures[index].bus.licenseNumber)
 		.then(function(response) {
 		    vm.busLoc = response.data;
 		    vm.getRemainingTime();
+		    vm.calculateAndDisplayRoute();
 		})
 		.catch(function(response) {
 		    vm.searchMessage = 'Хайлт олдсонгүй';
 		    console.log(err);
 		});
-	    transdepData.getPointsByLNumber(licenseNumber) 
-		.then(function(response) {
-		    vm.origin = response.data.origin;
-		    vm.destination = response.data.destination;
-		    vm.waypoints = response.data.waypoints;
-		    if (vm.waypoints === undefined) {
-			vm.searchMessage = 'Хайлт олдсонгүй';
-		    } else {
-			vm.searchMessage = 'Чиглэл: ' + response.data.origin.name + '-' + response.data.destination.name;
-			vm.calculateAndDisplayRoute();
-		    }
-		})
-		.catch(function(err) {
-		    vm.searchMessage = 'Хайлт олдсонгүй';
-		    console.log(err);
-		});
-
+	    
 	};
 
  	vm.getRemainingTime = function() {
-	    // googleDirection.remainingTime((vm.busLoc.lat).toString()+','+(vm.busLoc.lon).toString(), '47.91901688406377,106.91774368286133', api_key)
-	    // 	.then(function(responese) {
-	    // 	    console.log(response.data);
-	    // 	})
-	    // 	.catch(function(err) {
-	    // 	    console.log(err);
-	    // 	});
 
+	    // Remaining
+
+	    var routeData = {
+	    	origin: vm.busLoc.lat + ', ' + vm.busLoc.lng,
+	    	destination: vm.route.destination.lat + ', ' + vm.route.destination.lng,
+	    	travelMode: 'DRIVING'
+	    };
 	    
-	    // var routeData = {
-	    // 	origin: vm.busLoc.lat + ', ' + vm.busLoc.lng,
-	    // 	destination: vm.destination.lat + ', ' + vm.destination.lng,
-	    // 	travelMode: 'DRIVING'
-	    // };
+	    directionsService.route(routeData, function(response, status) {
+	    	if (status === 'OK') {
+		    $scope.searchMessage += '\n' + vm.route.destination.name + ' хүртэл ' + response.routes[0].legs[0].distance.text + ' зам үлдсэн ба ойролцоогоор ' + response.routes[0].legs[0].duration.text + ' дараа очно.';
+	    	} else {
+	    	    window.alert('Directions request failed due to ' + status);
+	    	}
+	    });
+
+
+	    // Elapsed
+
+	    var routeData = {
+		origin: vm.route.origin.lat + ', ' + vm.route.origin.lng,
+	    	destination: vm.busLoc.lat + ', ' + vm.busLoc.lng,
+	    	travelMode: 'DRIVING'
+	    };
 	    
-	    // directionsService.route(routeData, function(response, status) {
-	    // 	if (status === 'OK') {
-	    // 	    console.log(response);
-	    // 	} else {
-	    // 	    window.alert('Directions request failed due to ' + status);
-	    // 	}
-	    // });
+	    directionsService.route(routeData, function(response, status) {
+	    	if (status === 'OK') {
+		     $scope.searchMessage += '\n' + vm.route.origin.name+'-с хөдлөөд ' +  response.routes[0].legs[0].distance.text + ' замыг ' + response.routes[0].legs[0].duration.text + ' хугацаанд туулсан.';
+	    	} else {
+	    	    window.alert('Directions request failed due to ' + status);
+	    	}
+	    });
+
 	};
 
 
@@ -108,13 +111,13 @@
             });
 	    
 	    var routeData = {
-		origin: vm.origin.lat + ', ' + vm.origin.lng,
-		destination: vm.destination.lat + ', ' + vm.destination.lng,
+		origin: vm.route.origin.lat + ', ' + vm.route.origin.lng,
+		destination: vm.route.destination.lat + ', ' + vm.route.destination.lng,
 		travelMode: 'DRIVING',
 		waypoints: []
 	    }
 
-	    vm.waypoints.forEach(function(point) {
+	    vm.route.waypoints.forEach(function(point) {
 		routeData.waypoints.push({
 		    location: point.lat + ', ' + point.lng,
 		    stopover: true
@@ -140,8 +143,6 @@
 
 	};
 	$window.initMap();
-
-	
     }
 })();
 

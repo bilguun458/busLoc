@@ -9,10 +9,10 @@
       <!-- <p>Доорх талбарт хот хооронд зорчигч тээврийн хэрэгслийн улсын дугаарыг бичиж хайх товчийг дарснаар тухайн тээврийн хэрэгслийн газрын зураг дээрх байршлын мэдээллийг авах боломжтой. Хот хооронд зорчих тээврийн хэрэгслийн мэдээллийг <a href="#/route">Чиглэл</a> хэсгээс авна уу.</p> -->
 
       <div class="dropdown" auto-close="outsideClick">
-	<input disable-auto-close class="form-control dropdown-toggle"  data-toggle="dropdown" type="text" ng-model="searchText" placeholder="Search"></input>
+	<input disable-auto-close class="form-control dropdown-toggle"  data-toggle="dropdown" type="text" ng-model="searchText" placeholder="Чиглэл | Хөдөлсөн огноо | Жолооч | Улсын дугаар "></input>
 	<div class="dropdown-menu">
 	  <a ng-repeat="departure in vm.departures | filter:searchText"
-	     ng-click="vm.search(departure.bus.licenseNumber)"
+	     ng-click="vm.search($index)"
 	     class="list-group-item list-group-item-action">
 	    Чиглэл: {{departure.origin}}-{{departure.destination}},
 	    Хөдөлсөн огноо: {{ departure.date | dateInMillis | date: 'yyyy-MM-dd hh:mm' }},
@@ -41,10 +41,53 @@
       <!-- 	</div> -->
       <!-- </div> -->
       <!-- <br> -->
-      <strong>{{vm.searchMessage}}</strong><br><br>
+      <br>
+      <strong>{{searchMessage}}</strong><br><br>
       <!-- <p>Газрын зураг дээр автобусны байршилыг <strong>ногоон</strong> тэмдэглэгээгээр дүрслэв.</p> -->
       <div id="map"></div>
       <!--      <iframe ng-src="{{vm.mapUrl}}"> -->
+      <br>
+      
+
+
+
+      <!-- <div class="page-header"> -->
+      <!-- 	<h1>Horizontal timeline</h1> -->
+      <!-- </div> -->
+      <!-- <div style="display:inline-block;width:100%;"> -->
+      <!-- 	<ul class="timeline timeline-horizontal"> -->
+      <!-- 	  <li class="timeline-item"> -->
+      <!-- 	    <div class="timeline-badge primary"><i class="glyphicon glyphicon-time"></i></div> -->
+      <!-- 	    <div class="timeline-panel"> -->
+      <!-- 	      <div class="timeline-heading"> -->
+      <!-- 		<p>10sfjk asdjfl; als -->
+      <!-- 		    f;alksjdflkja;ls -->
+      <!-- 		  ;kaljsf;lsaj;flk:0 -->
+      <!-- 		sldkfjlkasflksaklfjhaslkdjfhaskljfhaskfhskldjfhskdjfhlak</p> -->
+      <!-- 	      </div> -->
+      <!-- 	    </div> -->
+      <!-- 	  </li> -->
+      <!-- 	  <li class="timeline-item"> -->
+      <!-- 	    <div class="timeline-badge primary"><i class="glyphicon glyphicon-time"></i></div> -->
+      <!-- 	    <div class="timeline-panel"> -->
+      <!-- 	      <div class="timeline-heading"> -->
+      <!-- 		<p><small class="text-muted"> 10:00</small></p> -->
+      <!-- 	      </div> -->
+      <!-- 	    </div> -->
+      <!-- 	  </li> -->
+      <!-- 	  <li class="timeline-item"> -->
+      <!-- 	    <div class="timeline-badge primary"><i class="glyphicon glyphicon-time"></i></div> -->
+      <!-- 	    <div class="timeline-panel"> -->
+      <!-- 	      <div class="timeline-heading"> -->
+      <!-- 		<p><small class="text-muted"> 10:00</small></p> -->
+      <!-- 	      </div> -->
+      <!-- 	    </div> -->
+      <!-- 	  </li> -->
+	  
+      <!-- 	</ul> -->
+      <!-- </div> -->
+
+      
     </div>
   </div>
 </div>
