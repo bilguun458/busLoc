@@ -10,7 +10,6 @@
 	var directionsService = new google.maps.DirectionsService;
 	var directionsDisplay = new google.maps.DirectionsRenderer;
 	var mapPinIcon = '/images/pin.png';
-	var api_key = 'AIzaSyCjCauLhho2YsU-lRT4XZC91PIBwqhO-48';
 	
 	transdepData.getRoutes()
 	    .then(function(response) {
@@ -40,7 +39,8 @@
 
 	    vm.route = vm.routes[vm.departures[index].routeIdx];
 	    vm.route.date = vm.departures[index].date;
-	    $scope.searchMessage = 'Чиглэл: ' + vm.route.origin.name + '-' + vm.route.destination.name
+	    vm.route.bus = vm.departures[index].bus;
+	    // $scope.searchMessage = 'Чиглэл: ' + vm.route.origin.name + '-' + vm.route.destination.name
 	    transdepData.getBusLocation(vm.departures[index].bus.licenseNumber)
 		.then(function(response) {
 		    vm.busLoc = response.data;

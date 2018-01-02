@@ -1,4 +1,5 @@
 (function() {
+
     "use strict";
     angular.module('busLocApp', ['ngRoute']);
 
@@ -10,11 +11,6 @@
 		controller: 'homeCtrl',
         	controllerAs: 'vm'
 	    })
-	    // .when('/route', {
-	    // 	templateUrl: 'route/route.view.html',
-	    // 	controller: 'routeCtrl',
-            // 	controllerAs: 'vm'
-	    // })
 	    .when('/about', {
 		templateUrl: 'about/about.view.html',
 		controller: 'aboutCtrl',
@@ -27,11 +23,18 @@
 	    })
 	    .otherwise({redirectTo: '/'});
     }
-    
+
+    var env = {};
+
+    if(window){  
+	Object.assign(env, window.__env);
+    }
 
     angular
 	.module('busLocApp')
-	.config(['$routeProvider', config]);
+	.config(['$routeProvider', config])
+	.constant('__env', env);
+    
 })();
 
 
