@@ -19,14 +19,14 @@ $ npm install -g nodemon
 $ npm install
       #+END_SRC
 ** Configuration
-   - Set API url inside
+   - Set API Url
       #+BEGIN_SRC 
 public/angular/env.js:
     window.__env.busApiUrl = '';
     window.__env.routeApiUrl = '';
       #+END_SRC
 
-   - Change Google Map API Key inside 
+   - Change Google Map API Key 
       #+BEGIN_SRC 
 api_client/index.html(line 7)
       #+END_SRC
