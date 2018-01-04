@@ -1,0 +1,35 @@
+<div style="display:inline-block;width:100%;">
+      	<ul class="timeline timeline-horizontal">
+      	  <li class="timeline-item">
+      	    <div class="timeline-badge primary bus"><span class="glyphicon glyphicon-home"></span></div>
+      	    <div class="timeline-panel">
+      	      <div class="timeline-heading">
+      		<p><small class="text-muted">{{vm.route.origin.name}}</small></p>
+      	      </div>
+      	    </div>
+      	  </li>
+      	  <li class="timeline-item">
+      	    <div class="timeline-badge primary bus"><img src="/images/bus.png"></div>
+      	    <div class="timeline-panel">
+      	      <div class="timeline-heading">
+      		<p><small class="text-muted">
+		    {{vm.route.origin.name}}-с гараад<br>
+		    {{vm.elapsed.duration | dateInHour}} хугацаанд<br>
+		    {{vm.elapsed.distance | distanceInKm}} зам туулсан.</small></p>
+      	      </div>
+      	    </div>
+      	  </li>
+      	  <li class="timeline-item">
+      	    <div class="timeline-badge primary"><span class="glyphicon glyphicon-home"></span></div>
+      	    <div class="timeline-panel">
+      	      <div class="timeline-heading">
+      		<p><small class="text-muted">
+		    {{vm.route.destination.name}} хүртэл <br>
+		    {{vm.remaining.distance | distanceInKm}} зам үлдсэн ба<br>
+		    Ойролцоогоор {{vm.remaining.duration | dateInHour}} дараа очно.<br>
+		</small></p>
+      	      </div>
+      	    </div>
+      	  </li>
+      	</ul>
+      </div>

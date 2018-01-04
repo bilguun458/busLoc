@@ -8,7 +8,6 @@ require('./app_api/models/db');
 var uglifyJs = require("uglify-js");
 var fs = require('fs');
 
-var routes = require('./app_server/routes/index');
 var routesApi = require('./app_api/routes/index');
 
 var app = express();
@@ -25,10 +24,12 @@ var appClientFiles = {
     "app_client/why/why.controller.js": fs.readFileSync("app_client/why/why.controller.js", "utf8"),
     "app_client/route/route.controller.js": fs.readFileSync("app_client/route/route.controller.js", "utf8"),
     "app_client/common/directives/navigation/navigation.directive.js": fs.readFileSync("app_client/common/directives/navigation/navigation.directive.js", "utf8"),
+    "app_client/common/directives/timeline/timeline.directive.js": fs.readFileSync("app_client/common/directives/timeline/timeline.directive.js", "utf8"),
     "app_client/common/services/transdepData.service.js": fs.readFileSync("app_client/common/services/transdepData.service.js", "utf8"),
-    "app_client/common/services/googleDirection.service.js": fs.readFileSync("app_client/common/services/googleDirection.service.js", "utf8"),
     "app_client/common/filters/dateInMillis.filter.js": fs.readFileSync("app_client/common/filters/dateInMillis.filter.js", "utf8"),
-    "app_client/common/filters/addHtmlLineBreaks.filter.js": fs.readFileSync("app_client/common/filters/addHtmlLineBreaks.filter.js", "utf8")
+    "app_client/common/filters/dateInHour.filter.js": fs.readFileSync("app_client/common/filters/dateInHour.filter.js", "utf8"),
+    "app_client/common/filters/addHtmlLineBreaks.filter.js": fs.readFileSync("app_client/common/filters/addHtmlLineBreaks.filter.js", "utf8"),
+    "app_client/common/filters/distanceInKm.filter.js": fs.readFileSync("app_client/common/filters/distanceInKm.filter.js", "utf8")
 };
 
 
@@ -51,7 +52,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
 
-//app.use('/', routes);
 app.use('/api', routesApi);
 
 app.use(function(req, res) {

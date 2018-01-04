@@ -2,7 +2,8 @@
     window.__env = window.__env || {};
 
     // API url
-    window.__env.apiUrl = 'api/route/';
+    window.__env.busApiUrl = 'api/route/bus/';
+    window.__env.routeApiUrl = 'api/route/routes/'
 
     // Google Map API Key
     window.__env.apiKey = '';

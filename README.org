@@ -1,5 +1,7 @@
 * Bus Loaction
   Хот хоорондын зорчигт тээврийн хэрэгслийн байршлын илтгэх систем.
+* Demo
+  [[busloc.herokuapp.com][Эндээс]] үзүүлэн хуудас үзэх боломжтой.
 * Getting Started
 ** Prerequisities
    - NodeJS
@@ -17,8 +19,18 @@ $ npm install -g nodemon
 $ npm install
       #+END_SRC
 ** Configuration
-   - Change API url inside public/angular/env.js
-   - Change Google Map API Key inside api_client/index.html
+   - Set API url inside
+      #+BEGIN_SRC 
+public/angular/env.js:
+    window.__env.busApiUrl = '';
+    window.__env.routeApiUrl = '';
+      #+END_SRC
+
+   - Change Google Map API Key inside 
+      #+BEGIN_SRC 
+api_client/index.html(line 7)
+      #+END_SRC
+
 ** Run server
       #+BEGIN_SRC
 $ nodemon --ignore public/angular/

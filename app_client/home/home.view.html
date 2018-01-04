@@ -4,10 +4,7 @@
   <div class="row">
     <div class="col-xs-12">
       
-      <!-- <p><i>Энэ систем нь замдаа явж буй хот хоорондын зорчигч тээврийн хэрэгслүүдын байршлын мэдээллийг газрын зураг дээр дүрслэн харуулахад зориулагдсан.</i></p> -->
-      
-      <!-- <p>Доорх талбарт хот хооронд зорчигч тээврийн хэрэгслийн улсын дугаарыг бичиж хайх товчийг дарснаар тухайн тээврийн хэрэгслийн газрын зураг дээрх байршлын мэдээллийг авах боломжтой. Хот хооронд зорчих тээврийн хэрэгслийн мэдээллийг <a href="#/route">Чиглэл</a> хэсгээс авна уу.</p> -->
-
+      <p>Автобусны чиглэл эсвэл улсын дугаар, жолоочийн нэрээр хайна уу.</p>
       <div class="dropdown" auto-close="outsideClick">
 	<input disable-auto-close class="form-control dropdown-toggle"  data-toggle="dropdown" type="text" ng-model="searchText" placeholder="Чиглэл | Хөдөлсөн огноо | Жолооч | Улсын дугаар "></input>
 	<div class="dropdown-menu">
@@ -22,73 +19,11 @@
 	</div>
       </div>
 
-      
-      <!-- <input ng-model="searchText"/> -->
-      <!-- <div> -->
-      <!-- 	<ul> -->
-      <!-- 	  <li ng-repeat="departure in vm.departures | filter:searchText" ng-click="vm.search(departure.bus.licenseNumber)"> -->
-      <!-- 	    {{departure.origin}} -> {{departure.destination}}, -->
-      <!-- 	    {{departure.date}}, {{departure.bus.driver}}, {{departure.bus.licenseNumber}}</li> -->
-      <!-- 	</ul> -->
-      <!-- </div> -->
-      
-      <!-- <div class="row"> -->
-      <!-- 	<div class="col-xs-6"> -->
-      <!-- 	  <input type="text" class="form-control" placeholder="уба1234" ng-model="vm.licenceNumber"/> -->
-      <!-- 	</div> -->
-      <!-- 	<div class="col-xs-2"> -->
-      <!-- 	  <button autofocus type="button" class="btn" ng-click="vm.search(vm.licenceNumber)">Хайх</button> -->
-      <!-- 	</div> -->
-      <!-- </div> -->
-      <!-- <br> -->
       <br>
-      <!-- <strong>{{searchMessage}}</strong><br><br> -->
-      <strong>{{vm.route.origin.name}}-{{vm.route.destination.name}}</strong> чиглэлд <strong>{{vm.route.date |  dateInMillis | date: 'yyyy-MM-dd hh:mm' }}</strong> цагт хөдөлсөн <strong>{{vm.route.bus.driver}}</strong> жолоочтой <strong>{{vm.route.bus.licenseNumber}}</strong> тээврийн хэрэгслийн байршил<br><br>
-      <!-- <p>Газрын зураг дээр автобусны байршилыг <strong>ногоон</strong> тэмдэглэгээгээр дүрслэв.</p> -->
+      <strong>{{vm.route.origin.name}}-{{vm.route.destination.name}}</strong> чиглэлд <strong>{{vm.route.date |  dateInMillis | date: 'yyyy-MM-dd hh:mm' }}</strong> цагт хөдөлсөн <strong>{{vm.route.bus.driver}}</strong> жолоочтой <strong>{{vm.route.bus.licenseNumber}}</strong> тээврийн хэрэгслийн байршил:<br><br>
+
       <div id="map"></div>
-      <!--      <iframe ng-src="{{vm.mapUrl}}"> -->
-      <br>
-      
-
-
-
-      <!-- <div class="page-header"> -->
-      <!-- 	<h1>Horizontal timeline</h1> -->
-      <!-- </div> -->
-      <!-- <div style="display:inline-block;width:100%;"> -->
-      <!-- 	<ul class="timeline timeline-horizontal"> -->
-      <!-- 	  <li class="timeline-item"> -->
-      <!-- 	    <div class="timeline-badge primary"><i class="glyphicon glyphicon-time"></i></div> -->
-      <!-- 	    <div class="timeline-panel"> -->
-      <!-- 	      <div class="timeline-heading"> -->
-      <!-- 		<p>10sfjk asdjfl; als -->
-      <!-- 		    f;alksjdflkja;ls -->
-      <!-- 		  ;kaljsf;lsaj;flk:0 -->
-      <!-- 		sldkfjlkasflksaklfjhaslkdjfhaskljfhaskfhskldjfhskdjfhlak</p> -->
-      <!-- 	      </div> -->
-      <!-- 	    </div> -->
-      <!-- 	  </li> -->
-      <!-- 	  <li class="timeline-item"> -->
-      <!-- 	    <div class="timeline-badge primary"><i class="glyphicon glyphicon-time"></i></div> -->
-      <!-- 	    <div class="timeline-panel"> -->
-      <!-- 	      <div class="timeline-heading"> -->
-      <!-- 		<p><small class="text-muted"> 10:00</small></p> -->
-      <!-- 	      </div> -->
-      <!-- 	    </div> -->
-      <!-- 	  </li> -->
-      <!-- 	  <li class="timeline-item"> -->
-      <!-- 	    <div class="timeline-badge primary"><i class="glyphicon glyphicon-time"></i></div> -->
-      <!-- 	    <div class="timeline-panel"> -->
-      <!-- 	      <div class="timeline-heading"> -->
-      <!-- 		<p><small class="text-muted"> 10:00</small></p> -->
-      <!-- 	      </div> -->
-      <!-- 	    </div> -->
-      <!-- 	  </li> -->
-	  
-      <!-- 	</ul> -->
-      <!-- </div> -->
-
-      
+      <timeline elapsed="vm.elapsed" remaining="vm.remaining" route="vm.route"></timeline>
     </div>
   </div>
 </div>

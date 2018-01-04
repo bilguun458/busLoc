@@ -4,8 +4,8 @@
 	.module('busLocApp')
 	.controller('homeCtrl', homeCtrl);
 
-    homeCtrl.$inject = ['$scope', 'transdepData', '$sce', '$window'];
-    function homeCtrl($scope, transdepData, $sce, $window) {
+    homeCtrl.$inject = ['$scope', 'transdepData', '$sce', '$window', '$timeout'];
+    function homeCtrl($scope, transdepData, $sce, $window, $timeout) {
 	var vm = this;
 	var directionsService = new google.maps.DirectionsService;
 	var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -57,7 +57,7 @@
  	vm.getRemainingTime = function() {
 
 	    // Remaining
-
+	    vm.remaining = {};
 	    var routeData = {
 	    	origin: vm.busLoc.lat + ', ' + vm.busLoc.lng,
 	    	destination: vm.route.destination.lat + ', ' + vm.route.destination.lng,
@@ -66,7 +66,9 @@
 	    
 	    directionsService.route(routeData, function(response, status) {
 	    	if (status === 'OK') {
-		    $scope.searchMessage += '\n' + vm.route.destination.name + ' хүртэл ' + response.routes[0].legs[0].distance.text + ' зам үлдсэн ба ойролцоогоор ' + response.routes[0].legs[0].duration.text + ' дараа очно.';
+		    vm.remaining.duration = response.routes[0].legs[0].duration.value;
+		    vm.remaining.distance = response.routes[0].legs[0].distance.value;
+		    // $scope.searchMessage += '\n' + vm.route.destination.name + ' хүртэл ' + response.routes[0].legs[0].distance.text + ' зам үлдсэн ба ойролцоогоор ' + response.routes[0].legs[0].duration.text + ' дараа очно.';
 	    	} else {
 	    	    window.alert('Directions request failed due to ' + status);
 	    	}
@@ -74,7 +76,8 @@
 
 
 	    // Elapsed
-
+	    
+	    vm.elapsed = {};
 	    var routeData = {
 		origin: vm.route.origin.lat + ', ' + vm.route.origin.lng,
 	    	destination: vm.busLoc.lat + ', ' + vm.busLoc.lng,
@@ -83,12 +86,18 @@
 	    
 	    directionsService.route(routeData, function(response, status) {
 	    	if (status === 'OK') {
-		     $scope.searchMessage += '\n' + vm.route.origin.name+'-с хөдлөөд ' +  response.routes[0].legs[0].distance.text + ' замыг ' + response.routes[0].legs[0].duration.text + ' хугацаанд туулсан.';
+		    //vm.elapsed.duration = response.routes[0].legs[0].duration.value;
+		    vm.elapsed.duration = (Date.parse(new Date()) - Date.parse(vm.route.date))/1000;
+		    vm.elapsed.distance = response.routes[0].legs[0].distance.value;
+		    // $scope.searchMessage += '\n' + vm.route.origin.name+'-с хөдлөөд ' +  response.routes[0].legs[0].distance.text + ' замыг ' + response.routes[0].legs[0].duration.text + ' хугацаанд туулсан.';
+		    // console.log($scope.searchMessage);
 	    	} else {
 	    	    window.alert('Directions request failed due to ' + status);
 	    	}
 	    });
 
+	    $timeout(function() {
+	    }, 300);
 	};
 
 
@@ -135,12 +144,8 @@
 	}
 
 	$window.initMap = function() {
-	    vm.map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 7,
-		center: {lat:47.918958, lng: 106.917622}
-	    });
+	    vm.map = new google.maps.Map(document.getElementById('map'), {});
 	    directionsDisplay.setMap(vm.map);
-
 	};
 	$window.initMap();
     }
